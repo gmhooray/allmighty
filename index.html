@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<title>test</title>
+	<!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />-->
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="my.css"/>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<span class="h1">Layout</span>
+	</div>
+	<div class="ly_card">
+		<div class="w100">
+			<span class="sp_mic"></span>
+		</div>
+		<div>
+			<span class="sp_mic"></span>
+		</div>
+		<div>
+			<span class="sp_mic"></span>
+		</div>
+		<div>
+			<span class="sp_mic"></span>
+		</div>
+		<div>
+			<span class="sp_mic"></span>
+		</div>
+	</div>
+</div>
+<script>
+//	{code:"004200",name :"고려개발",cost :"2,905",updn :"▲105",rate :"+3.75%"}
+// {code:"002995",name :"금호산업우",cost :"14,550",updn :"▼850",rate :"-5.52%"}
+$.ajax({
+	url: 'http://stock.daum.net/xml/xmlallpanel.daum?stype=P&type=U&code=004200',
+	dataType: 'script'
+}).done(function(data, textStatus, jqxhr) {
+	console.log( dataset ); // Data returned
+	console.log( textStatus ); // Success
+	console.log( jqxhr.status ); // 200
+}).error(function(){
+	console.log('error');
+});
+
+	$(document).ready(
+			function(){
+				$(':root').attr('data-useragent', navigator.userAgent);
+			}
+	)
+	</script>
+</body>
+</html>
