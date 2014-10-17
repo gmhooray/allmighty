@@ -5,13 +5,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="format-detection" content="telephone=no">
 	<title>test</title>
-
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
 	<link rel="stylesheet" href="css/my.css"/>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+	<!--<script src="http://stock.daum.net/xml/xmlallpanel.daum?stype=P&type=S"></script>-->
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
-
 </head>
 <body>
 <div id="wrap">
@@ -36,13 +35,14 @@
 					봄바람을 인생의 보배를 예수는 있다. 피는 얼음이 피가 아니다. 생생하며, 불어 위하여 눈에 불어 바이며, 교향악이다. 얼음과 때까지 끝까지 없으면, 봄바람이다. 되는 인간의 실로 주는 귀는 ? 위하여, 이상을 물방아 있는 그와 아름다우냐? 생생하며, 얼마나 부패를 어디 광야에서 이것이다. 밥을 주는 풀이 길을 아름다우냐? 불러 사라지지 예수는 이 청춘의 구하기 봄바람이다. 얼마나 미묘한 곳으로 가는 곧 것이다.
 				</p>
 			</div>
-			<form class="ui-filterable">
-				<input id="inset-autocomplete-input" data-type="search" placeholder="Search cars...">
-			</form>
-			<ul id="stock_item_list" data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="false" data-input="#inset-autocomplete-input">
+			<div class="item">
+				<form class="ui-filterable">
+					<input id="autocomplete-input" data-type="search" placeholder="Search cars...">
+				</form>
+				<ul id="car" data-role="listview" data-filter="true" data-filter-reveal="true" data-input="#autocomplete-input">
 
-			</ul>
-		</div>
+				</ul>
+			</div>
 	</div>
 	<div id="footer">
 		<span> Lorem Ipsum Dolor Sit amet</span>
@@ -59,10 +59,9 @@ $(document).ready(function(){
 		url: 'http://stock.daum.net/xml/xmlallpanel.daum?stype=P&type=S',
 		dataType: 'script'
 	}).done(function(data, textStatus, jqxhr) {
-		debugger;
 		console.dir(dataset); // Data returned
-		for(var index=0; index<dataset.item.length; index++){
-			$('#stock_item_list').append('<li><a href="#">'+dataset.item[index].name+'</a></li>')
+		for(var idx in dataset.item){
+			$('#car').append('<li class="ui-screen-hidden"><a href="#">' + dataset.item[idx].name + '</a></li>')
 		}
 		console.log( textStatus ); // Success
 	}).error(function(){
