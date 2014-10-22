@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="ko">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="format-detection" content="telephone=no">
 	<title>test</title>
 	<link rel="stylesheet" href="css/my.css"/>
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
-	<!--<script src="http://stock.daum.net/xml/xmlallpanel.daum?stype=P&type=S"></script>-->
+	<!--	//	{code:"004200",name :"고려개발",cost :"2,905",updn :"▲105",rate :"+3.75%"}
+	// {code:"002995",name :"금호산업우",cost :"14,550",updn :"▼850",rate :"-5.52%"}-->
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!--
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
 	<script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+-->
 </head>
 <body>
 <div id="wrap">
@@ -19,7 +22,7 @@
 	</div>
 	<div id="container">
 		<div class="ly_card">
-			<div class="w100 item">
+			<div class="item w100">
 				<span class="spr_mic"></span>
 				<span>La Fiesta</span>
 				<span>Since the viewport meta tag revolves so heavily around setting the styles of how a website should be rendered it has been recommend to move the viewport from a meta tag with HTML to an @ rule within CSS. This helps keep the style separated from content, providing a more semantic approach.</span>
@@ -40,34 +43,55 @@
 					<input id="autocomplete-input" data-type="search" placeholder="Search cars...">
 				</form>
 				<ul id="car" data-role="listview" data-filter="true" data-filter-reveal="true" data-input="#autocomplete-input">
+				</ul>
+			</div>
+			<div class="item">
+				<input type="text" id="auto_complete">
+				<ul id="auto_result">
 
 				</ul>
 			</div>
-	</div>
-	<div id="footer">
-		<span> Lorem Ipsum Dolor Sit amet</span>
+		</div>
+		<div id="footer">
+			<span> Lorem Ipsum Dolor Sit amet</span>
+		</div>
 	</div>
 </div>
 <script>
+	$('#auto_complete').keyup(function(){
+		$('#auto_result').empty();
+		if($('#auto_complete').val().length > 1){
+			$.each(dataset.item, function(idx, item){
+				if(item.name.indexOf($('#auto_complete').val()) > -1){
+					$('#auto_result').append('<li><a href="#">' + item.name + '</a></li>');
+					if($('#auto_result>li').size()>7){
+//						debugger;
+					}
+				}
+			})
+//			debugger;
+		}
+	})
 
-//	{code:"004200",name :"고려개발",cost :"2,905",updn :"▲105",rate :"+3.75%"}
-// {code:"002995",name :"금호산업우",cost :"14,550",updn :"▼850",rate :"-5.52%"}
+	$.ajax({
+		url: 'http://finance.daum.net/xml/xmlallpanel.daum?stype=P&type=S',
+		dataType: 'script',
+		success : function(){
+//			for(var i=0; i<dataset.item.length; i++){
+//				$('#car').append('<li class="ui-screen-hidden"><a href="#">' + dataset.item[i].name + '</a></li>')
+//			}
+//			dataset.item.forEach(function(item){
+//				$('#car').append('<li class="ui-screen-hidden"><a href="#">' + item.name + '</a></li>')
+//
+//			})
+
+		}
+	})
 
 $(document).ready(function(){
-	$(':root').attr('data-useragent', navigator.userAgent);
-	$.ajax({
-		url: 'http://stock.daum.net/xml/xmlallpanel.daum?stype=P&type=S',
-		dataType: 'script'
-	}).done(function(data, textStatus, jqxhr) {
-		console.dir(dataset); // Data returned
-		for(var idx in dataset.item){
-			$('#car').append('<li class="ui-screen-hidden"><a href="#">' + dataset.item[idx].name + '</a></li>')
-		}
-		console.log( textStatus ); // Success
-	}).error(function(){
-		console.log('error');
-	});
+//	$(':root').attr('data-useragent', navigator.userAgent);
+//	$(':root').attr('lang', window.navigator.language);
 })
-	</script>
+</script>
 </body>
 </html>
